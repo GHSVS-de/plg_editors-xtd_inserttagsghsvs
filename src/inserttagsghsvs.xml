@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.9" type="plugin" group="editors-xtd" method="upgrade">
-	<name>PLG_EDITORS-XTD_INSERTTAGSGHSVS</name>
-	<author>G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)</author>
-	<creationDate>2019-11-02</creationDate>
-	<copyright>Copyright (C) 2019, G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de). All rights reserved.</copyright>
-	<license>GNU General Public License version 3 or later; see LICENSE.txt file</license>
-	<authorUrl>https://www.ghsvs.de</authorUrl>
-	<version>2019.11.02</version>
-	<description>PLG_EDITORS-XTD_INSERTTAGSGHSVS_XML_DESC</description>
-	<versionHistory>
--2019.11.02:
-https://spielereien.illovo.de
-		https://updates.ghsvs.de/changelog.php?file=inserttagsghsvs_xtd&amp;element=inserttagsghsvs
-	</versionHistory>
-	
-	<updateservers><server type="extension" priority="1" name="PLG_EDITORS-XTD_INSERTTAGSGHSVS">https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/inserttagsghsvs_xtd-update.xml</server></updateservers>
+<extension type="{{type}}" client="{{client}}" group="{{folder}}" method="{{method}}">
+	<name>{{nameUpper}}</name>
+	<author>{{authorName}}</author>
+	<creationDate>{{creationDate}}</creationDate>
+	<copyright>{{copyright}}</copyright>
+	<license>{{licenseLong}}</license>
+	<authorUrl>{{authorUrl}}</authorUrl>
+	<version>{{version}}</version>
+	<description>{{nameUpper}}_XML_DESC</description>
 
-	<changelogurl>https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/inserttagsghsvs_xtd-changelog.xml</changelogurl>
+	<updateservers>
+		<server type="extension" priority="1" name="{{nameUpper}}">{{xmlserver}}/{{name}}-update.xml</server>
+	</updateservers>
+
+	<changelogurl>{{xmlserver}}/{{name}}-changelog.xml</changelogurl>
+
+	<infourl>{{infourl}}?file={{name}}</infourl>
 
 	<scriptfile>installerScript.php</scriptfile>
-	<minimumPhp>7.2.0</minimumPhp>
-	<!--<maximumPhp>7.3.999999</maximumPhp>-->
-	<minimumJoomla>3.9.10</minimumJoomla>
-	<maximumJoomla>3.10.99999</maximumJoomla>
-	<allowDowngrades>1</allowDowngrades>
+	<minimumPhp>{{minimumPhp}}</minimumPhp>
+	<maximumPhp>{{maximumPhp}}</maximumPhp>
+	<minimumJoomla>{{minimumJoomla}}</minimumJoomla>
+	<maximumJoomla>{{maximumJoomla}}</maximumJoomla>
+	<allowDowngrades>{{allowDowngrades}}</allowDowngrades>
 
 	<files>
-		<filename plugin="inserttagsghsvs">inserttagsghsvs.php</filename>
+		<filename plugin="{{filename}}">{{filename}}.php</filename>
 		<folder>language</folder>
 		<filename>installerScript.php</filename>
 		<filename>LICENSE.txt</filename>
 	</files>
 
-	<media destination="plg_editors-xtd_inserttagsghsvs" folder="media">
+	<media destination="{{name}}" folder="media">
 		<folder>html</folder>
 		<folder>js</folder>
 	</media>
-
+	{{namespace}}
 	<config />
 
 </extension>
