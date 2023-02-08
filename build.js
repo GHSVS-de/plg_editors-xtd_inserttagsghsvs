@@ -56,7 +56,7 @@ let replaceXmlOptions = {
 	to = `./package`;
 	await helper.copy(from, to);
 
-	const zipFilename = `${name}-${version}_${versionSub}.zip`;
+	const zipFilename = `${name}-${version}.zip`;
 
 	replaceXmlOptions.xmlFile = Manifest;
 	replaceXmlOptions.zipFilename = zipFilename;
