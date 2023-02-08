@@ -2,7 +2,7 @@
 	"name": "plg_editors-xtd_inserttagsghsvs",
 	"nameReal": "plg_editors-xtd_inserttagsghsvs",
 	"filename": "inserttagsghsvs",
-	"version": "2019.11.02",
+	"version": "2023.02.08",
 	"versionCompare": "2019.11.02",
 	"update": {
 		"type": "plugin",
@@ -10,15 +10,15 @@
 		"client": "site",
 		"tag": "stable",
 		"targetplatform": [
-			"4.*"
+			"4.[23456789]"
 		],
-		"namespace": "GHSVS\\Plugin\\EditorButton\\InsertTagsGhsvs"
+		"namespace": "GHSVS\\Plugin\\EditorsXtd\\InsertTagsGhsvs"
 	},
 	"releaseTxt": {
 		"title": "Joomla editor button. Insert HTML tags in editor.",
 		"requires": [],
 		"uses": [],
-		"language": []
+		"language": ["en-GB"]
 	},
 	"changelog": {
 		"projecturl": "https://github.com/GHSVS-de/plg_editors-xtd_inserttagsghsvs",
@@ -29,7 +29,8 @@
 		"lastTests": [
 			"PHP 8.0",
 			"PHP 8.1",
-			"Joomla 4.2"
+			"Joomla 4.2.7",
+			"Joomla 4.3.0-dev"
 		]
 	},
 	"minimumPhp": "7.4.0",

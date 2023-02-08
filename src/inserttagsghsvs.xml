@@ -13,10 +13,6 @@
 		<server type="extension" priority="1" name="{{nameUpper}}">{{xmlserver}}/{{name}}-update.xml</server>
 	</updateservers>
 
-	<changelogurl>{{xmlserver}}/{{name}}-changelog.xml</changelogurl>
-
-	<infourl>{{infourl}}?file={{name}}</infourl>
-
 	<scriptfile>installerScript.php</scriptfile>
 	<minimumPhp>{{minimumPhp}}</minimumPhp>
 	<maximumPhp>{{maximumPhp}}</maximumPhp>
@@ -25,8 +21,10 @@
 	<allowDowngrades>{{allowDowngrades}}</allowDowngrades>
 
 	<files>
-		<filename plugin="{{filename}}">{{filename}}.php</filename>
+		<!--<filename plugin="{{filename}}">{{filename}}.php</filename>-->
+		<folder plugin="inserttagsghsvs">services</folder>
 		<folder>language</folder>
+		<folder>src</folder>
 		<filename>installerScript.php</filename>
 		<filename>LICENSE.txt</filename>
 	</files>

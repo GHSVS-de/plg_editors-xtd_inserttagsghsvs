@@ -1,27 +1,26 @@
 <?php
-defined('_JEXEC') or die;
+namespace GHSVS\Plugin\EditorsXtd\InsertTagsGhsvs\Extension;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
+\defined('_JEXEC') or die;
+
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Object\CMSObject;
 use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Session\Session;
+use Joomla\CMS\HTML\HTMLHelper;
 
-class plgButtonInserttagsGhsvs extends CMSPlugin
+final class InsertTagsGhsvs extends CMSPlugin
 {
 	protected $autoloadLanguage = true;
-	protected $app;
 
 	function onDisplay($editorname, $asset, $author)
 	{
-		if (!$this->app->isClient('administrator')) {
+		if (!$this->getApplication()->isClient('administrator')) {
 			return false;
 		}
 
-		$user = Factory::getUser();
-
-		$extension = $this->app->getInput()->get('option');
+		$user = $this->getApplication()->getIdentity();
+		$extension = $this->getApplication()->getInput()->get('option');
 
 		if ($extension === 'com_categories')
 		{
@@ -44,7 +43,7 @@ class plgButtonInserttagsGhsvs extends CMSPlugin
 			return false;
 		}
 
-		$tagsOptions = array();
+		$tagsOptions = [];
 		$tagsOptions[] = '<option value=""></option>';
 		$tagsOptions[] = '<option value="abbr">abbr</option>';
 		$tagsOptions[] = '<option value="abbr||PHP">abbr PHP</option>';
@@ -52,7 +51,7 @@ class plgButtonInserttagsGhsvs extends CMSPlugin
 		$tagsOptions[] = '<option value="abbr||JS">abbr JS</option>';
 		$tagsOptions[] = '<option value="abbr||HTML">abbr HTML</option>';
 		$tagsOptions[] = '<option value="abbr||BS">abbr BS (Bootstrap)</option>';
-		
+
 		$tagsOptions[] = '<option value="span||code-eigenname||Joomla">span code-eigenname Joomla</option>';
 		$tagsOptions[] = '<option value="span||code-eigenname||Bootstrap">span code-eigenname Bootstrap</option>';
 		$tagsOptions[] = '<option value="span||code-eigenname||JQuery">span code-eigenname JQuery</option>';
@@ -61,7 +60,7 @@ class plgButtonInserttagsGhsvs extends CMSPlugin
 		$tagsOptions[] = '<option value="code">code</option>';
 		$tagsOptions[] = '<option value="code||filename">code class=code-filename</option>';
 		$tagsOptions[] = '<option value="code||htmltag">code class=code-htmltag</option>';
-		
+
 		// Ich weiß mir nicht anders zu helfen, als das &gt; mit \ zu maskieren, weil sonst im Editor aus einem
 		// SCRIPT, das zu &lt;SCRIPT&gt; werden soll ein <sript ...>...</ script> wird. Keine Ahnung wo.
 		// Viel versucht. Das \ muss man dann halt selbst löschen.
@@ -71,7 +70,7 @@ class plgButtonInserttagsGhsvs extends CMSPlugin
 		$tagsOptions[] = '<option value="kbd||klickweg">kbd class=kbd-klickweg</option>';
 
 		$tagsOptions[] = '<option value="i">i</option>';
-		
+
 		$tagsOptions[] = '<option value="samp">samp (Defines sample output from a computer program)</option>';
 		$tagsOptions[] = '<option value="var">var (Defines a variable)</option>';
 		$tagsOptions[] = '<option value="div.codeContainer">div.codeContainer (Special)</option>';
@@ -97,29 +96,36 @@ class plgButtonInserttagsGhsvs extends CMSPlugin
 			$popupTmpl = str_replace($replace, $with, $popupTmpl);
 		}
 
-		$lang = Factory::getLanguage();
+		$lang = $this->getApplication()->getLanguage();
 		$popupFile = $popupDir . 'insertcode_popup.' . $lang->getTag() . '.html';
 
 		file_put_contents(JPATH_SITE . '/' . $popupFile, $popupTmpl);
 
-		HTMLHelper::_('behavior.core');
-		Factory::getDocument()->addScriptOptions('xtd-inserttagsghsvs', array('editor' => $editorname));
-
+		$this->getApplication()->getDocument()->getWebAssetManager()->useScript('core');
+		$this->getApplication()->getDocument()->addScriptOptions('xtd-inserttagsghsvs', ['editor' => $editorname]);
 		$root = '';
 
 		// Editors prepend JUri::base() to $link. Whyever.
-		if ($this->app->isClient('administrator'))
+		if ($this->getApplication()->isClient('administrator'))
 		{
 			$root = '../';
 		}
 
-		$button = new CMSObject;
+		$link = $root . $popupFile . '?editor=' . urlencode($editorname). '&amp;' . Session::getFormToken() . '=1';
+
+		$button = new CMSObject();
 		$button->set('class', 'btn');
 		$button->modal = true;
-		$button->link = $root . $popupFile . '?editor=' . urlencode($editorname);
-		$button->set('text', Text::_('PLG_XTD_INSERTTAGSGHSVS_BUTTON'));
+		$button->link = $link;
+		$button->text = Text::_('PLG_XTD_INSERTTAGSGHSVS_BUTTON');
 		$button->name = 'file-add'; // icon class without 'icon-'
-		$button->options = "{handler: 'iframe', size: {x: 800, y: 550}}";
+		// $button->options = "{handler: 'iframe', size: {x: 800, y: 550}}";
+		$button->options = [
+			'height'     => '550px',
+			'width'      => '800px',
+			'bodyHeight' => '70',
+			'modalWidth' => '80',
+		];
 		return $button;
 	}
 }
