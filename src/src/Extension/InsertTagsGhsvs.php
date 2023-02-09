@@ -24,7 +24,7 @@ final class InsertTagsGhsvs extends CMSPlugin
 
 		if ($extension === 'com_categories')
 		{
-			$parts = explode('.', $this->app->getInput()->get('extension', 'com_content'));
+			$parts = explode('.', $this->getApplication()->getInput()->get('extension', 'com_content'));
 			$extension = $parts[0];
 		}
 
