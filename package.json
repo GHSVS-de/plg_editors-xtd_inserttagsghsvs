@@ -10,7 +10,7 @@
 		"client": "site",
 		"tag": "stable",
 		"targetplatform": [
-			"4.[23456789]"
+			"4.[3456789]"
 		],
 		"namespace": "GHSVS\\Plugin\\EditorsXtd\\InsertTagsGhsvs"
 	},
