@@ -2,8 +2,8 @@
 	"name": "plg_editors-xtd_inserttagsghsvs",
 	"nameReal": "plg_editors-xtd_inserttagsghsvs",
 	"filename": "inserttagsghsvs",
-	"version": "2023.02.08",
-	"versionCompare": "2019.11.02",
+	"version": "2023.02.10",
+	"versionCompare": "2023.02.08",
 	"update": {
 		"type": "plugin",
 		"folder": "editors-xtd",
@@ -29,13 +29,12 @@
 		"lastTests": [
 			"PHP 8.0",
 			"PHP 8.1",
-			"Joomla 4.2.7",
 			"Joomla 4.3.0-dev"
 		]
 	},
 	"minimumPhp": "7.4.0",
 	"maximumPhp": "8.99999.99999",
-	"minimumJoomla": "4.2.5",
+	"minimumJoomla": "4.3.0",
 	"maximumJoomla": "4.9999.9999",
 	"allowDowngrades": "1",
 	"creationDate": "2019-11-02",
