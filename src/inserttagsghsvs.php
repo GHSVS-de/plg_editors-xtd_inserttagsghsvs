@@ -1,30 +1,31 @@
 <?php
-namespace GHSVS\Plugin\EditorsXtd\InsertTagsGhsvs\Extension;
+defined('_JEXEC') or die;
 
-\defined('_JEXEC') or die;
-
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Object\CMSObject;
 use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\CMS\Session\Session;
-use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Plugin\PluginHelper;
 
-final class InsertTagsGhsvs extends CMSPlugin
+class plgButtonInserttagsGhsvs extends CMSPlugin
 {
 	protected $autoloadLanguage = true;
+	protected $app;
 
 	function onDisplay($editorname, $asset, $author)
 	{
-		if (!$this->getApplication()->isClient('administrator')) {
+		if (!$this->app->isClient('administrator')) {
 			return false;
 		}
 
-		$user = $this->getApplication()->getIdentity();
-		$extension = $this->getApplication()->getInput()->get('option');
+		$user = Factory::getUser();
+
+		$extension = $this->app->input->get('option');
 
 		if ($extension === 'com_categories')
 		{
-			$parts = explode('.', $this->app->getInput()->get('extension', 'com_content'));
+			$parts = explode('.', $this->app->input->get('extension', 'com_content'));
 			$extension = $parts[0];
 		}
 
@@ -43,7 +44,7 @@ final class InsertTagsGhsvs extends CMSPlugin
 			return false;
 		}
 
-		$tagsOptions = [];
+		$tagsOptions = array();
 		$tagsOptions[] = '<option value=""></option>';
 		$tagsOptions[] = '<option value="abbr">abbr</option>';
 		$tagsOptions[] = '<option value="abbr||PHP">abbr PHP</option>';
@@ -96,36 +97,29 @@ final class InsertTagsGhsvs extends CMSPlugin
 			$popupTmpl = str_replace($replace, $with, $popupTmpl);
 		}
 
-		$lang = $this->getApplication()->getLanguage();
+		$lang = Factory::getLanguage();
 		$popupFile = $popupDir . 'insertcode_popup.' . $lang->getTag() . '.html';
 
 		file_put_contents(JPATH_SITE . '/' . $popupFile, $popupTmpl);
 
-		$this->getApplication()->getDocument()->getWebAssetManager()->useScript('core');
-		$this->getApplication()->getDocument()->addScriptOptions('xtd-inserttagsghsvs', ['editor' => $editorname]);
+		HTMLHelper::_('behavior.core');
+		Factory::getDocument()->addScriptOptions('xtd-inserttagsghsvs', array('editor' => $editorname));
+
 		$root = '';
 
 		// Editors prepend JUri::base() to $link. Whyever.
-		if ($this->getApplication()->isClient('administrator'))
+		if ($this->app->isClient('administrator'))
 		{
 			$root = '../';
 		}
 
-		$link = $root . $popupFile . '?editor=' . urlencode($editorname). '&amp;' . Session::getFormToken() . '=1';
-
-		$button = new CMSObject();
+		$button = new CMSObject;
 		$button->set('class', 'btn');
 		$button->modal = true;
-		$button->link = $link;
-		$button->text = Text::_('PLG_XTD_INSERTTAGSGHSVS_BUTTON');
-		$button->name = $this->_type . '_' . $this->_name; // icon class without 'icon-'
-		// $button->options = "{handler: 'iframe', size: {x: 800, y: 550}}";
-		$button->options = [
-			'height'     => '550px',
-			'width'      => '800px',
-			'bodyHeight' => '70',
-			'modalWidth' => '80',
-		];
+		$button->link = $root . $popupFile . '?editor=' . urlencode($editorname);
+		$button->set('text', Text::_('PLG_XTD_INSERTTAGSGHSVS_BUTTON'));
+		$button->name = $button->name = $this->_type . '_' . $this->_name;
+		$button->options = "{handler: 'iframe', size: {x: 800, y: 550}}";
 		return $button;
 	}
 }

@@ -2,20 +2,21 @@
 	"name": "plg_editors-xtd_inserttagsghsvs",
 	"nameReal": "plg_editors-xtd_inserttagsghsvs",
 	"filename": "inserttagsghsvs",
-	"version": "2023.02.08",
-	"versionCompare": "2019.11.02",
+	"version": "2023.02.09-j427-bc-fix",
+	"versionCompare": "2023.02.08",
 	"update": {
 		"type": "plugin",
 		"folder": "editors-xtd",
 		"client": "site",
 		"tag": "stable",
 		"targetplatform": [
-			"4.[3456789]"
+			"3.10",
+			"4.2"
 		],
 		"namespace": "GHSVS\\Plugin\\EditorsXtd\\InsertTagsGhsvs"
 	},
 	"releaseTxt": {
-		"title": "Joomla editor button. Insert HTML tags in editor.",
+		"title": "Joomla editor button. Insert HTML tags in editor. Bug fix for BC break in Joomla 4.2.7.",
 		"requires": [],
 		"uses": [],
 		"language": ["en-GB"]
@@ -29,14 +30,14 @@
 		"lastTests": [
 			"PHP 8.0",
 			"PHP 8.1",
-			"Joomla 4.2.7",
-			"Joomla 4.3.0-dev"
+			"Joomla 3.10.11",
+			"Joomla 4.2.7"
 		]
 	},
 	"minimumPhp": "7.4.0",
 	"maximumPhp": "8.99999.99999",
-	"minimumJoomla": "4.2.5",
-	"maximumJoomla": "4.9999.9999",
+	"minimumJoomla": "3.10.0",
+	"maximumJoomla": "4.2.9999",
 	"allowDowngrades": "1",
 	"creationDate": "2019-11-02",
 	"licenseLong": "GNU General Public License version 3 or later; see LICENSE.txt.",
