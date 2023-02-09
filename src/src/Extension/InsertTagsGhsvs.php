@@ -118,7 +118,7 @@ final class InsertTagsGhsvs extends CMSPlugin
 		$button->modal = true;
 		$button->link = $link;
 		$button->text = Text::_('PLG_XTD_INSERTTAGSGHSVS_BUTTON');
-		$button->name = 'file-add'; // icon class without 'icon-'
+		$button->name = $this->_type . '_' . $this->_name;; // icon class without 'icon-'
 		// $button->options = "{handler: 'iframe', size: {x: 800, y: 550}}";
 		$button->options = [
 			'height'     => '550px',
