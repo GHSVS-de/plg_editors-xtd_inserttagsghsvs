@@ -2,9 +2,10 @@
 	"name": "plg_editors-xtd_inserttagsghsvs",
 	"nameReal": "plg_editors-xtd_inserttagsghsvs",
 	"filename": "inserttagsghsvs",
-	"version": "2023.02.10",
-	"versionCompare": "2023.02.08",
+	"version": "2023.05.14",
+	"versionCompare": "2023.02.10",
 	"update": {
+		"infourl": "https://github.com/GHSVS-de/plg_editors-xtd_inserttagsghsvs/releases",
 		"type": "plugin",
 		"folder": "editors-xtd",
 		"client": "site",
@@ -23,13 +24,13 @@
 	"changelog": {
 		"projecturl": "https://github.com/GHSVS-de/plg_editors-xtd_inserttagsghsvs",
 		"infosDE": "",
-		"infosEN": "https://github.com/GHSVS-de/plg_editors-xtd_inserttagsghsvs#readme",
+		"infosEN": "",
 		"docsDE": "",
 		"docsEN": "",
 		"lastTests": [
-			"PHP 8.0",
+			"PHP 7.4",
 			"PHP 8.1",
-			"Joomla 4.3.0-dev"
+			"Joomla 4.3"
 		]
 	},
 	"minimumPhp": "7.4.0",
