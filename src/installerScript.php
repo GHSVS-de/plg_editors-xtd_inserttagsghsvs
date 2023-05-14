@@ -80,6 +80,11 @@ class plgEditorsxtdInserttagsGhsvsInstallerScript extends InstallerScript
 			return false;
 		}
 
+		if ($type === 'update')
+		{
+			$this->removeOldUpdateservers();
+		}
+
 		return true;
 	}
 
@@ -101,4 +106,50 @@ class plgEditorsxtdInserttagsGhsvsInstallerScript extends InstallerScript
 			$this->removeFiles();
 		}
 	}
+
+	/**
+	 * Remove the outdated updateservers.
+	 *
+	 * @return  void
+	 *
+	 * @since   version after 2019.05.29
+	 */
+	 protected function removeOldUpdateservers()
+ 	{
+ 		$db = Factory::getDbo();
+ 		try
+ 		{
+ 			$query = $db->getQuery(true);
+
+ 			$query->select('update_site_id')
+ 				->from($db->qn('#__update_sites'))
+ 				->where($db->qn('location') . ' = '
+ 					. $db->q('https://raw.githubusercontent.com/GHSVS-de/upadateservers/master/inserttagsghsvs_xtd-update.xml'));
+
+ 			$id = (int) $db->setQuery($query)->loadResult();
+
+ 			if (!$id)
+ 			{
+ 				return;
+ 			}
+
+ 			// Delete from update sites
+ 			$db->setQuery(
+ 				$db->getQuery(true)
+ 					->delete($db->qn('#__update_sites'))
+ 					->where($db->qn('update_site_id') . ' = ' . $id)
+ 			)->execute();
+
+ 			// Delete from update sites extensions
+ 			$db->setQuery(
+ 				$db->getQuery(true)
+ 					->delete($db->qn('#__update_sites_extensions'))
+ 					->where($db->qn('update_site_id') . ' = ' . $id)
+ 			)->execute();
+ 		}
+ 		catch (Exception $e)
+ 		{
+ 			return;
+ 		}
+ 	}
 }
