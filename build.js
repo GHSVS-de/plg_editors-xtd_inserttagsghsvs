@@ -12,7 +12,7 @@ const replaceXml = require(`${pathBuildKram}/build/replaceXml.js`);
 const helper = require(`${pathBuildKram}/build/helper.js`);
 
 const pc = require(`${pathBuildKram}/node_modules/picocolors`);
-const fse = require(`${pathBuildKram}/node_modules/fs-extra`);
+// const fse = require(`${pathBuildKram}/node_modules/fs-extra`);
 
 let zipOptions = {};
 let from = "";
